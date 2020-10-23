@@ -1,0 +1,57 @@
+<%- include('./includes/head.ejs') %>
+<%- include('./includes/navigation.ejs') %>
+<div class="main_header">
+  <div class="row">
+    <div class="col-md-10 col-12 mx-auto">
+
+      <div class="container-fluid  main_content">
+
+        <form class="temp_form" method="POST" action="/weather">
+          <input type="text" id="cityName" name="city" placeholder="Enter you city name.." autocomplete="off">
+          <br>
+          <input type="submit" value="search" id="submitBtn">
+          <p id="temp_err"></p>
+        </form>
+
+        <div class="tempInformation ">
+          <div class="top_layer">
+            <p id="day" style="font-size:large; color: aqua;"><%= Day %></p>
+            <p id="today_date" style="font-size: large; color: aqua;"><%= Date %> <%= Month %></p>
+          </div>
+          <div class="main_layer ">
+            <% if(content) { %>
+              <% if(cityName) { %>
+                <p id="city_name"><%= cityName %>, <%= country %> </p>
+              <% } else { %>
+                <p id="city_name">Get Output here</p>
+              <% } %>
+              <div class="middle_layer <% if(!temprature) { %> data_hide <% } %>">
+                <p id="temp"><span id="temp_real_val"><%= temprature %></span><sup style="font-size: xx-large;">o</sup>C</p>
+                <% if(condition) { %>
+                  <h1><%= condition %></h1>
+                <p id="temp_status"><% if(condition == "Clear") { %>
+                  <i class='fas  fa-sun' style='color: #eccc68;'></i>
+                  <% } else if(condition == "Clouds") { %>
+                  <i class='fas  fa-cloud' style='color: #f1f2f6;'></i>
+                  <% } else if(condition == "Rain") { %>
+                  <i class='fas  fa-cloud-rain' style='color: #a4b0be;'></i>
+                  <% } else { %>
+                  <i class='fas  fa-cloud' style='color:#f1f2f6;'></i>
+                  <% } %>
+                </p>
+                <% } %>
+              </div>
+            <% } else { %>
+              <p id="city_name"><%= status %></p>
+            <% } %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- footer -->
+<%- include('./includes/end.ejs') %>
